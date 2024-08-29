@@ -1,18 +1,17 @@
 import streamlit as st
-
 import pandas as pd
-df=pd.read_csv("supermarket_sales.csv")
-st.dataframe(df,1000,1000)
-#st.table(df)
-st.title("My first page")
-st.write("Welcome to our project")
-st.text("Can we chat together")
-st.header("Welcome")
-st.subheader("Whats new")
-st.markdown("This is markdown")
-name=st.text_input("Please enter your name")
-if st.button("Click me"):
-    st.write("Hello {},welcome to streamlit".format(name))
-st.success("You have successfully login to your account")
-st.warning("You havae entered the wrong passward")
-st.error("Filepath not found")
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load the CSV file
+data = pd.read_csv('supermarket_sales.csv')
+
+# Sidebar for selecting the column to plot
+column_to_plot = st.sidebar.selectbox('Select a column to plot:', data.columns)
+
+# Create a Seaborn count plot
+plt.figure(figsize=(10, 6))
+sns.countplot(x=column_to_plot, data=data)
+
+# Show the plot in Streamlit
+st.pyplot(plt)
